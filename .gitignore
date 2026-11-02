@@ -29,3 +29,4 @@ dist-ssr
 
 # Символическая ссылка создаётся командой artisan storage:link на каждой машине (путь абсолютный)
 /public/storage
+.phpunit.result.cache
