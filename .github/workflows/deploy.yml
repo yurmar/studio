@@ -3,6 +3,15 @@ name: Deploy to Production
 on:
   push:
     branches: [master]
+  workflow_dispatch: {}
+
+# Выкладки идут по очереди и не прерывают друг друга.
+concurrency:
+  group: deploy-studio
+  cancel-in-progress: false
+
+permissions:
+  contents: read
 
 jobs:
   deploy:
@@ -35,7 +44,7 @@ jobs:
           port: ${{ secrets.SSH_PORT || 22 }}
           script: |
             cd ${{ secrets.SSH_PATH }}
-            git pull origin master
+            git pull --ff-only origin master
             composer install --no-dev --optimize-autoloader --no-interaction
             php artisan migrate --force
             php artisan config:cache
@@ -63,3 +72,17 @@ jobs:
           script: |
             cd ${{ secrets.SSH_PATH }}
             chown -R "$(stat -c %U:%G .)" .
+
+      # Сайт должен отвечать после выкладки: иначе деплой краснеет сразу, а не через жалобу посетителя.
+      - name: Smoke check
+        run: |
+          for path in / /api/hero /notebook; do
+            ok=0
+            for i in $(seq 1 10); do
+              code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "https://studio.plusuy.pro$path" || true)
+              if [ "$code" = "200" ]; then ok=1; break; fi
+              sleep 3
+            done
+            [ "$ok" = "1" ] || { echo "::error::studio.plusuy.pro$path ответил $code вместо 200"; exit 1; }
+            echo "studio.plusuy.pro$path: 200"
+          done
