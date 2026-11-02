@@ -10,13 +10,13 @@ DevOps: Linux, Docker, Nginx, Git
 
 ## Разделы сайта
 
-- [Главная](https://plusuy.pro/)
-- [Обо мне](https://plusuy.pro/#about)
-- [Услуги](https://plusuy.pro/#services)
-- [Достижения](https://plusuy.pro/#achievements)
-- [Технологии](https://plusuy.pro/#technologies)
-- [Контакты](https://plusuy.pro/#contacts)
-- [Блокнот](https://plusuy.pro/notebook)
+- [Главная](https://studio.plusuy.pro/)
+- [Обо мне](https://studio.plusuy.pro/#about)
+- [Услуги](https://studio.plusuy.pro/#services)
+- [Достижения](https://studio.plusuy.pro/#achievements)
+- [Технологии](https://studio.plusuy.pro/#technologies)
+- [Контакты](https://studio.plusuy.pro/#contacts)
+- [Блокнот](https://studio.plusuy.pro/notebook)
 
 ## Контакты
 
