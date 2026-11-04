@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProjectTask extends Model
 {
-    public const STATUSES = ['todo', 'in_progress', 'done', 'cancelled'];
+    public const STATUSES = ['todo', 'in_progress', 'done', 'cancelled', 'later'];
 
     protected $fillable = [
         'milestone_id', 'note_id', 'title', 'description', 'status', 'priority',

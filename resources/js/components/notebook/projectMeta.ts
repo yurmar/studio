@@ -30,6 +30,7 @@ export const TASK_STATUS_OPTIONS: { value: TaskStatus; label: string }[] = [
     { value: 'in_progress', label: 'В работе' },
     { value: 'done', label: 'Готово' },
     { value: 'cancelled', label: 'Отменена' },
+    { value: 'later', label: 'Позже' },
 ]
 
 export const MILESTONE_STATUS_OPTIONS: { value: MilestoneStatus; label: string }[] = [

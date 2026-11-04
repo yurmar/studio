@@ -23,6 +23,7 @@ const STATUS_TONE: Record<ProjectTask['status'], string> = {
     in_progress: 'border-blue-500/40 bg-blue-500/15',
     done: 'border-emerald-500/35 bg-emerald-500/15',
     cancelled: 'border-orange-500/40 bg-orange-500/15',
+    later: 'border-violet-500/35 bg-violet-500/10',
 }
 
 const small = 'input-field rounded-md px-2 py-1 text-base sm:text-xs'

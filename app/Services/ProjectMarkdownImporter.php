@@ -48,6 +48,7 @@ class ProjectMarkdownImporter
         'in_progress' => 'in_progress', 'в работе' => 'in_progress',
         'done' => 'done', 'готово' => 'done',
         'cancelled' => 'cancelled', 'canceled' => 'cancelled', 'отменена' => 'cancelled',
+        'later' => 'later', 'позже' => 'later',
     ];
 
     private const MILESTONE_STATUS = [

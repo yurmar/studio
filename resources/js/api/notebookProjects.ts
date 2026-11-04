@@ -3,7 +3,7 @@ import client from './client'
 export type ProjectStatus = 'idea' | 'planning' | 'active' | 'paused' | 'completed' | 'archived'
 export type ProjectPriority = 'low' | 'normal' | 'high'
 
-export type TaskStatus = 'todo' | 'in_progress' | 'done' | 'cancelled'
+export type TaskStatus = 'todo' | 'in_progress' | 'done' | 'cancelled' | 'later'
 export type MilestoneStatus = 'todo' | 'in_progress' | 'done'
 
 export interface ProjectTask {
