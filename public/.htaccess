@@ -1,6 +1,6 @@
 <IfModule php_module>
-    php_value upload_max_filesize 64M
-    php_value post_max_size 70M
+    php_value upload_max_filesize 160M
+    php_value post_max_size 170M
 </IfModule>
 
 <IfModule mod_headers.c>

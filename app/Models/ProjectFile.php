@@ -10,7 +10,7 @@ class ProjectFile extends Model
     public const DISK = 'local';
 
     /** Максимальный размер одного файла, КБ. */
-    public const MAX_SIZE_KB = 51200;
+    public const MAX_SIZE_KB = 153600;
 
     /** Общий лимит файлов проекта, байт. */
     public const PROJECT_QUOTA = 524288000;

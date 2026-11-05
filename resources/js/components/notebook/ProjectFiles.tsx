@@ -34,7 +34,7 @@ interface UploadItem {
 
 type Kind = 'images' | 'video' | 'docs' | 'audio' | 'archives' | 'other'
 
-const MAX_BYTES = 50 * 1024 * 1024
+const MAX_BYTES = 150 * 1024 * 1024
 const QUOTA_BYTES = 500 * 1024 * 1024
 
 const KINDS: { value: Kind; label: string; short: string; icon: typeof FileIcon; tone: string }[] = [
@@ -356,7 +356,7 @@ export default function ProjectFiles({ projectId, onCount }: Props) {
         for (const file of list) {
             const key = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`
             if (file.size > MAX_BYTES) {
-                setUploads(prev => [...prev, { key, name: file.name, percent: 0, error: 'Больше 50 МБ' }])
+                setUploads(prev => [...prev, { key, name: file.name, percent: 0, error: 'Больше 150 МБ' }])
                 continue
             }
             setUploads(prev => [...prev, { key, name: file.name, percent: 0 }])
@@ -627,7 +627,7 @@ export default function ProjectFiles({ projectId, onCount }: Props) {
                     dragOver ? 'border-sky-500 bg-sky-500/10 text-foreground' : 'border-sky-500/20 text-muted-foreground'
                 }`}
             >
-                Перетащите файлы сюда — они попадут в {currentFolder === null ? 'корень хранилища' : `папку «${folderById.get(currentFolder)?.name ?? ''}»`}. До 50 МБ на файл, до 500 МБ на проект.
+                Перетащите файлы сюда — они попадут в {currentFolder === null ? 'корень хранилища' : `папку «${folderById.get(currentFolder)?.name ?? ''}»`}. До 150 МБ на файл, до 500 МБ на проект.
             </div>
 
             {uploads.map(u => (
