@@ -139,15 +139,6 @@ export default function ProjectTaskRow({ task, milestones, isFirst, isLast, onSa
                 <div className="flex items-center flex-shrink-0">
                     <button
                         type="button"
-                        onClick={() => { setDraft(title); setEditing(true) }}
-                        className="p-1 text-muted-foreground hover:text-sky-500"
-                        aria-label="Редактировать задачу"
-                        title="Редактировать"
-                    >
-                        <Pencil size={14} />
-                    </button>
-                    <button
-                        type="button"
                         disabled={isFirst}
                         onClick={() => onMove(task, -1)}
                         className="p-1 text-muted-foreground hover:text-sky-500 disabled:opacity-30"
@@ -164,14 +155,25 @@ export default function ProjectTaskRow({ task, milestones, isFirst, isLast, onSa
                     >
                         <ArrowDown size={14} />
                     </button>
-                    <button
-                        type="button"
-                        onClick={() => onDelete(task)}
-                        className="p-1 text-muted-foreground hover:text-red-400"
-                        aria-label="Удалить задачу"
-                    >
-                        <Trash2 size={14} />
-                    </button>
+                    <div className="flex flex-col items-center">
+                        <button
+                            type="button"
+                            onClick={() => { setDraft(title); setEditing(true) }}
+                            className="p-1 text-muted-foreground hover:text-sky-500"
+                            aria-label="Редактировать задачу"
+                            title="Редактировать"
+                        >
+                            <Pencil size={14} />
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => onDelete(task)}
+                            className="p-1 text-muted-foreground hover:text-red-400"
+                            aria-label="Удалить задачу"
+                        >
+                            <Trash2 size={14} />
+                        </button>
+                    </div>
                 </div>
             </div>
 
