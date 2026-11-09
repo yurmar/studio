@@ -104,7 +104,7 @@ class ProjectTaskController extends Controller
     private function validated(Request $request, NotebookProject $project): array
     {
         return $request->validate([
-            'title' => 'sometimes|nullable|string|max:255',
+            'title' => 'sometimes|nullable|string|max:2000',
             'description' => 'sometimes|nullable|string|max:5000',
             'status' => ['sometimes', Rule::in(ProjectTask::STATUSES)],
             'priority' => ['sometimes', Rule::in(NotebookProject::PRIORITIES)],

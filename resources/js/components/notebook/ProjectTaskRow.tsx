@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { ArrowDown, ArrowUp, GripVertical, Trash2 } from 'lucide-react'
+import { ArrowDown, ArrowUp, GripVertical, Pencil, Trash2 } from 'lucide-react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import type { ProjectMilestone, ProjectTask, ProjectTaskPatch } from '@/api/notebookProjects'
@@ -29,6 +29,7 @@ const STATUS_TONE: Record<ProjectTask['status'], string> = {
 const small = 'input-field rounded-md px-2 py-1 text-base sm:text-xs'
 
 const COLLAPSED_LINES = 2
+const TITLE_MAX = 2000
 
 export default function ProjectTaskRow({ task, milestones, isFirst, isLast, onSave, onDelete, onMove }: Props) {
     const [title, setTitle] = useState(task.title)
@@ -38,6 +39,8 @@ export default function ProjectTaskRow({ task, milestones, isFirst, isLast, onSa
     })
 
     const [expanded, setExpanded] = useState(false)
+    const [editing, setEditing] = useState(false)
+    const [draft, setDraft] = useState('')
     const [overflows, setOverflows] = useState(false)
     const titleRef = useRef<HTMLTextAreaElement>(null)
 
@@ -118,7 +121,7 @@ export default function ProjectTaskRow({ task, milestones, isFirst, isLast, onSa
                         }}
                         onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); e.currentTarget.blur() } }}
                         placeholder="Название задачи"
-                        maxLength={255}
+                        maxLength={TITLE_MAX}
                         className={`block w-full resize-none overflow-hidden bg-transparent text-base sm:text-sm focus:outline-none transition-colors ${
                             done || cancelled ? 'text-muted-foreground/60' : 'text-foreground font-medium'
                         } ${saveState === 'error' ? 'underline decoration-red-400' : ''}`}
@@ -134,6 +137,15 @@ export default function ProjectTaskRow({ task, milestones, isFirst, isLast, onSa
                     )}
                 </div>
                 <div className="flex items-center flex-shrink-0">
+                    <button
+                        type="button"
+                        onClick={() => { setDraft(title); setEditing(true) }}
+                        className="p-1 text-muted-foreground hover:text-sky-500"
+                        aria-label="Редактировать задачу"
+                        title="Редактировать"
+                    >
+                        <Pencil size={14} />
+                    </button>
                     <button
                         type="button"
                         disabled={isFirst}
@@ -200,6 +212,48 @@ export default function ProjectTaskRow({ task, milestones, isFirst, isLast, onSa
                     {milestones.map(m => <option key={m.id} value={m.id}>{m.title}</option>)}
                 </select>
             </div>
+            {editing && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+                    onClick={() => setEditing(false)}
+                >
+                    <div
+                        className="w-full max-w-2xl rounded-xl border border-border bg-background p-4 shadow-xl"
+                        onClick={e => e.stopPropagation()}
+                    >
+                        <div className="mb-2 text-sm font-medium">Редактировать задачу</div>
+                        <textarea
+                            autoFocus
+                            value={draft}
+                            onChange={e => setDraft(e.target.value)}
+                            maxLength={TITLE_MAX}
+                            rows={8}
+                            className="input-field w-full rounded-md px-3 py-2 text-base sm:text-sm"
+                        />
+                        <div className="mt-1 text-right text-xs text-muted-foreground">{draft.length}/{TITLE_MAX}</div>
+                        <div className="mt-3 flex justify-end gap-2">
+                            <button
+                                type="button"
+                                onClick={() => setEditing(false)}
+                                className="rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground"
+                            >
+                                Отмена
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    const v = draft.replace(/\n/g, ' ').trim()
+                                    if (v) { setTitle(v); saveNow({ title: v }) }
+                                    setEditing(false)
+                                }}
+                                className="rounded-md bg-sky-500 px-3 py-1.5 text-sm text-white hover:bg-sky-400"
+                            >
+                                Сохранить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

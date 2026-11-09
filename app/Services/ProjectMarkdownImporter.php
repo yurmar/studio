@@ -365,7 +365,7 @@ class ProjectMarkdownImporter
         $title = array_shift($parts);
 
         $task = [
-            'title' => Str::limit($title === '' ? 'Без названия' : $title, 255, ''),
+            'title' => Str::limit($title === '' ? 'Без названия' : $title, 2000, ''),
             'description' => null,
             'status' => $checked ? 'done' : 'todo',
             'priority' => 'normal',
