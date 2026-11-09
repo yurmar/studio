@@ -144,26 +144,8 @@ export default function ProjectTaskRow({ task, milestones, isFirst, isLast, onSa
                         </button>
                     )}
                 </div>
-                <div className="flex items-center flex-shrink-0">
-                    <button
-                        type="button"
-                        disabled={isFirst}
-                        onClick={() => onMove(task, -1)}
-                        className="p-1 text-muted-foreground hover:text-sky-500 disabled:opacity-30"
-                        aria-label="Поднять задачу"
-                    >
-                        <ArrowUp size={14} />
-                    </button>
-                    <button
-                        type="button"
-                        disabled={isLast}
-                        onClick={() => onMove(task, 1)}
-                        className="p-1 text-muted-foreground hover:text-sky-500 disabled:opacity-30"
-                        aria-label="Опустить задачу"
-                    >
-                        <ArrowDown size={14} />
-                    </button>
-                    <div className="flex flex-col items-center">
+                <div className="flex flex-col items-end flex-shrink-0">
+                    <div className="flex items-center">
                         <button
                             type="button"
                             onClick={copyTask}
@@ -189,6 +171,26 @@ export default function ProjectTaskRow({ task, milestones, isFirst, isLast, onSa
                             aria-label="Удалить задачу"
                         >
                             <Trash2 size={14} />
+                        </button>
+                    </div>
+                    <div className="flex items-center">
+                        <button
+                            type="button"
+                            disabled={isFirst}
+                            onClick={() => onMove(task, -1)}
+                            className="p-1 text-muted-foreground hover:text-sky-500 disabled:opacity-30"
+                            aria-label="Поднять задачу"
+                        >
+                            <ArrowUp size={14} />
+                        </button>
+                        <button
+                            type="button"
+                            disabled={isLast}
+                            onClick={() => onMove(task, 1)}
+                            className="p-1 text-muted-foreground hover:text-sky-500 disabled:opacity-30"
+                            aria-label="Опустить задачу"
+                        >
+                            <ArrowDown size={14} />
                         </button>
                     </div>
                 </div>
