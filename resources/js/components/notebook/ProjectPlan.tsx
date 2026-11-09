@@ -1,5 +1,5 @@
 import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowDown, ArrowUp, Check, ChevronDown, ChevronRight, Copy, FileUp, GripVertical, Loader2, Plus, Trash2 } from 'lucide-react'
+import { ArrowDown, ArrowUp, ChevronDown, ChevronRight, FileUp, GripVertical, Loader2, Plus, Trash2 } from 'lucide-react'
 import {
     closestCorners,
     CollisionDetection,
@@ -261,7 +261,6 @@ export default function ProjectPlan({ projectId, onCounts, onImported }: Props) 
     const [milestoneToDelete, setMilestoneToDelete] = useState<ProjectMilestone | null>(null)
     const [taskToDelete, setTaskToDelete] = useState<ProjectTask | null>(null)
     const [importOpen, setImportOpen] = useState(false)
-    const [copied, setCopied] = useState(false)
     const dragOrigin = useRef<{ taskId: number; milestoneId: number | null } | null>(null)
 
     const sensors = useSensors(
@@ -359,26 +358,6 @@ export default function ProjectPlan({ projectId, onCounts, onImported }: Props) 
         const next = arrayMove(milestones, index, target)
         setMilestones(next)
         apiReorderMilestones(projectId, next.map(x => x.id)).catch(load)
-    }
-
-    const planToMarkdown = () => {
-        const line = (t: ProjectTask) => `- [${t.status === 'done' ? 'x' : ' '}] ${t.title}${t.due_date ? ` (до ${t.due_date})` : ''}`
-        const parts: string[] = []
-        milestones.forEach(m => {
-            const dates = [m.start_date, m.deadline].filter(Boolean).join(' — ')
-            parts.push([`## ${m.title}${dates ? ` (${dates})` : ''}`, ...tasksOf(m.id).map(line)].join('\n'))
-        })
-        const rest = tasksOf(null)
-        if (rest.length) parts.push([`## Без этапа`, ...rest.map(line)].join('\n'))
-        return parts.join('\n\n')
-    }
-
-    const copyPlan = async () => {
-        try {
-            await navigator.clipboard.writeText(planToMarkdown())
-            setCopied(true)
-            setTimeout(() => setCopied(false), 1500)
-        } catch { /* буфер обмена недоступен */ }
     }
 
     // ---- drag and drop ----
@@ -520,13 +499,6 @@ export default function ProjectPlan({ projectId, onCounts, onImported }: Props) 
             <div className="flex items-center justify-between gap-3">
                 <h2 className="text-base font-semibold text-foreground">План</h2>
                 <div className="flex items-center gap-2">
-                    <button
-                        type="button"
-                        onClick={copyPlan}
-                        className="inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg border border-sky-500/30 text-sky-500 text-sm font-medium whitespace-nowrap hover:bg-sky-500/10"
-                    >
-                        {copied ? <Check size={14} /> : <Copy size={14} />} {copied ? 'Скопировано' : 'Копировать'}
-                    </button>
                     <button
                         type="button"
                         onClick={() => setImportOpen(true)}

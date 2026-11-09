@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { ArrowDown, ArrowUp, GripVertical, Pencil, Trash2 } from 'lucide-react'
+import { ArrowDown, ArrowUp, Check, Copy, GripVertical, Pencil, Trash2 } from 'lucide-react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import type { ProjectMilestone, ProjectTask, ProjectTaskPatch } from '@/api/notebookProjects'
@@ -40,6 +40,14 @@ export default function ProjectTaskRow({ task, milestones, isFirst, isLast, onSa
 
     const [expanded, setExpanded] = useState(false)
     const [editing, setEditing] = useState(false)
+    const [copied, setCopied] = useState(false)
+    const copyTask = async () => {
+        try {
+            await navigator.clipboard.writeText(title)
+            setCopied(true)
+            setTimeout(() => setCopied(false), 1500)
+        } catch { /* буфер обмена недоступен */ }
+    }
     const [draft, setDraft] = useState('')
     const [overflows, setOverflows] = useState(false)
     const titleRef = useRef<HTMLTextAreaElement>(null)
@@ -156,6 +164,15 @@ export default function ProjectTaskRow({ task, milestones, isFirst, isLast, onSa
                         <ArrowDown size={14} />
                     </button>
                     <div className="flex flex-col items-center">
+                        <button
+                            type="button"
+                            onClick={copyTask}
+                            className="p-1 text-muted-foreground hover:text-sky-500"
+                            aria-label="Копировать задачу"
+                            title={copied ? 'Скопировано' : 'Копировать'}
+                        >
+                            {copied ? <Check size={14} /> : <Copy size={14} />}
+                        </button>
                         <button
                             type="button"
                             onClick={() => { setDraft(title); setEditing(true) }}
