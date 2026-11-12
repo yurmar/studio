@@ -196,7 +196,7 @@ export default function ProjectTaskRow({ task, milestones, isFirst, isLast, onSa
                 </div>
             </div>
 
-            <div className="mt-2 flex flex-wrap items-center gap-2 pl-12">
+            <div className="mt-2 grid grid-cols-2 items-center gap-2 pl-7 sm:flex sm:flex-wrap sm:pl-12">
                 <select
                     value={task.status}
                     onChange={e => saveNow({ status: e.target.value as ProjectTask['status'] })}
@@ -226,7 +226,7 @@ export default function ProjectTaskRow({ task, milestones, isFirst, isLast, onSa
                 <select
                     value={task.milestone_id ?? ''}
                     onChange={e => saveNow({ milestone_id: e.target.value ? Number(e.target.value) : null })}
-                    className={`${small} max-w-[180px]`}
+                    className={`${small} min-w-0 sm:max-w-[180px]`}
                     aria-label="Этап задачи"
                 >
                     <option value="">Без этапа</option>

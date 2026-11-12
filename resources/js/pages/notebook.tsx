@@ -255,10 +255,10 @@ function NotesView({ switcher }: { switcher: ReactNode }) {
 
     return (
         <div className="min-h-screen pt-20">
-            <div className="max-w-6xl mx-auto px-4 py-8 h-[calc(100vh-5rem)]">
-                <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-6 h-full">
+            <div className="max-w-6xl mx-auto px-4 h-[calc(100dvh-5rem-3.5rem-env(safe-area-inset-bottom))] desk:h-[calc(100vh-5rem)] py-4 sm:py-8">
+                <div className="grid grid-cols-1 desk:grid-cols-[320px_1fr] gap-6 h-full">
                     {/* Список записей */}
-                    <div className={`flex-col h-full min-h-0 ${activeNote ? 'hidden md:flex' : 'flex'}`}>
+                    <div className={`flex-col h-full min-h-0 ${activeNote ? 'hidden desk:flex' : 'flex'}`}>
                         <div className="flex items-center justify-between mb-4 flex-shrink-0">
                             <div className="flex items-center gap-2.5">
                                 <div className="w-9 h-9 rounded-xl bg-sky-500/15 border border-sky-500/25 flex items-center justify-center flex-shrink-0">
@@ -335,7 +335,7 @@ function NotesView({ switcher }: { switcher: ReactNode }) {
                     </div>
 
                     {/* Редактор */}
-                    <div className={`h-full min-h-0 ${activeNote ? 'flex' : 'hidden md:flex'} flex-col card-block rounded-2xl p-5 sm:p-6`}>
+                    <div className={`h-full min-h-0 ${activeNote ? 'flex' : 'hidden desk:flex'} flex-col card-block rounded-2xl p-5 sm:p-6`}>
                         {!activeNote ? (
                             <div className="flex-1 flex items-center justify-center text-muted-foreground text-sm">
                                 Выберите запись слева или создайте новую

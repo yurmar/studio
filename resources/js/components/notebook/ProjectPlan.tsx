@@ -233,7 +233,7 @@ function MilestoneHeader({
                 <button type="button" disabled={isLast} onClick={() => onMove(milestone, 1)} className="p-1 text-muted-foreground hover:text-sky-500 disabled:opacity-30" aria-label="Опустить этап"><ArrowDown size={14} /></button>
                 <button type="button" onClick={() => onDelete(milestone)} className="p-1 text-muted-foreground hover:text-red-400" aria-label="Удалить этап"><Trash2 size={14} /></button>
             </div>
-            <div className="flex flex-wrap items-center gap-2 pl-12">
+            <div className="grid grid-cols-2 items-center gap-2 pl-7 sm:flex sm:flex-wrap sm:pl-12">
                 <select
                     value={milestone.status}
                     onChange={e => { schedule({ status: e.target.value as ProjectMilestone['status'] }); void flush() }}
@@ -244,9 +244,9 @@ function MilestoneHeader({
                 </select>
                 <input type="date" value={start} onChange={e => { setStart(e.target.value); schedule({ start_date: e.target.value || null }) }} className={small} aria-label="Начало этапа" />
                 <input type="date" value={deadline} onChange={e => { setDeadline(e.target.value); schedule({ deadline: e.target.value || null }) }} className={small} aria-label="Дедлайн этапа" />
-                <ProgressBar tasks={tasks} />
+                <div className="col-span-2 sm:col-auto"><ProgressBar tasks={tasks} /></div>
             </div>
-            {fieldErrors.deadline && <p className="pl-12 text-xs text-red-400">{fieldErrors.deadline}</p>}
+            {fieldErrors.deadline && <p className="pl-7 sm:pl-12 text-xs text-red-400">{fieldErrors.deadline}</p>}
         </div>
     )
 }

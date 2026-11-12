@@ -82,7 +82,7 @@ export default function ProjectEditor({ project, onSaved, onCounts, onTogglePin,
                 <button
                     type="button"
                     onClick={onBack}
-                    className="md:hidden flex items-center gap-1 text-sm text-sky-400"
+                    className="desk:hidden flex items-center gap-1 text-sm text-sky-400"
                 >
                     <ArrowLeft size={16} /> Назад
                 </button>
