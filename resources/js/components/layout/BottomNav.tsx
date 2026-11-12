@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Home, LayoutGrid, Mail, ListChecks, FileText } from 'lucide-react'
+import { Home, LayoutGrid, Mail, ListChecks, FileText, BookOpen } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import { smoothScrollTo } from '@/utils/scroll'
@@ -12,6 +12,7 @@ const ITEMS = [
 ]
 
 const AUTH_ITEMS = [
+    { label: 'Блокнот', to: '/notebook', anchor: null, icon: BookOpen },
     { label: 'Задачи', to: '/todo', anchor: null, icon: ListChecks },
     { label: 'Заказы', to: '/orders', anchor: null, icon: FileText },
 ]
@@ -36,7 +37,7 @@ export default function BottomNav() {
     }
 
     return (
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 z-[100] bottom-nav pb-[env(safe-area-inset-bottom)]">
+        <nav className="desk:hidden fixed bottom-0 left-0 right-0 z-[100] bottom-nav pb-[env(safe-area-inset-bottom)]">
             <div className="flex items-stretch justify-around">
                 {items.map(item => {
                     const Icon = item.icon

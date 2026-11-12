@@ -5,6 +5,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Мобильная навигация действует до вертикального планшета включительно (iPad Pro 13" — 1024px) */
+@theme {
+    --breakpoint-desk: 68.75rem;
+}
+
 @theme inline {
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);

@@ -51,7 +51,7 @@ export default function Header() {
                 </Link>
 
                 {/* Desktop nav */}
-                <nav className="hidden md:flex items-center gap-1">
+                <nav className="hidden desk:flex items-center gap-1">
                     {NAV.map(item => (
                         <NavLink
                             key={item.label}
@@ -77,19 +77,19 @@ export default function Header() {
                         <>
                             <Link
                                 to="/notebook"
-                                className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-sky-400 hover:bg-sky-500/10 border border-sky-500/20 transition-colors"
+                                className="hidden desk:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-sky-400 hover:bg-sky-500/10 border border-sky-500/20 transition-colors"
                             >
                                 <BookOpen size={13} /> Блокнот
                             </Link>
                             <Link
                                 to="/todo"
-                                className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-sky-400 hover:bg-sky-500/10 border border-sky-500/20 transition-colors"
+                                className="hidden desk:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-sky-400 hover:bg-sky-500/10 border border-sky-500/20 transition-colors"
                             >
                                 <ListChecks size={13} /> Задачи
                             </Link>
                             <Link
                                 to="/orders"
-                                className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-sky-400 hover:bg-sky-500/10 border border-sky-500/20 transition-colors"
+                                className="hidden desk:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-sky-400 hover:bg-sky-500/10 border border-sky-500/20 transition-colors"
                             >
                                 <FileText size={13} /> Заказы
                             </Link>
