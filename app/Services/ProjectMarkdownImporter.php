@@ -299,8 +299,11 @@ class ProjectMarkdownImporter
 
             foreach ($parsed['milestones'] as $data) {
                 $tasks = $data['tasks'];
-                unset($data['tasks']);
-                $milestone = $project->milestones()->create($data + ['sort_order' => $milestoneOrder++]);
+                $existingId = $data['existing_id'] ?? null;
+                unset($data['tasks'], $data['existing_id']);
+                $milestone = $existingId !== null
+                    ? $project->milestones()->findOrFail($existingId)
+                    : $project->milestones()->create($data + ['sort_order' => $milestoneOrder++]);
                 foreach ($tasks as $task) {
                     $this->createTask($project, $milestone, $task, $taskOrder++);
                 }
@@ -324,6 +327,81 @@ class ProjectMarkdownImporter
 
             return $filled;
         });
+    }
+
+    /**
+     * Оставляет в разобранном плане только то, чего ещё нет в проекте: этапы сравниваются
+     * по названию, задачи — по названию внутри этапа (или среди задач без этапа), ссылки — по url/path.
+     * Существующие этапы и задачи не меняются. Итоги (totals) пересчитываются.
+     */
+    public function onlyNew(NotebookProject $project, array $parsed): array
+    {
+        $norm = fn (?string $s) => mb_strtolower(preg_replace('/\s+/u', ' ', trim((string) $s)) ?? '');
+
+        $milestones = $project->milestones()->get(['id', 'title']);
+        $byTitle = [];
+        foreach ($milestones as $m) {
+            $byTitle[$norm($m->title)] ??= $m->id;
+        }
+
+        // Количество существующих задач по ключу «этап|название».
+        $have = [];
+        foreach ($project->tasks()->get(['milestone_id', 'title']) as $t) {
+            $k = ($t->milestone_id ?? 0).'|'.$norm($t->title);
+            $have[$k] = ($have[$k] ?? 0) + 1;
+        }
+
+        $filter = function (array $tasks, ?int $milestoneId) use (&$have, $norm): array {
+            $new = [];
+            foreach ($tasks as $task) {
+                $k = ($milestoneId ?? 0).'|'.$norm($task['title']);
+                if (($have[$k] ?? 0) > 0) {
+                    $have[$k]--;
+
+                    continue;
+                }
+                $new[] = $task;
+            }
+
+            return $new;
+        };
+
+        $newMilestones = [];
+        $usedTitles = [];
+        foreach ($parsed['milestones'] as $data) {
+            $key = $norm($data['title']);
+            $existingId = isset($usedTitles[$key]) ? null : ($byTitle[$key] ?? null);
+            $usedTitles[$key] = true;
+
+            if ($existingId !== null) {
+                $tasks = $filter($data['tasks'], $existingId);
+                if ($tasks) {
+                    $newMilestones[] = ['existing_id' => $existingId, 'tasks' => $tasks] + $data;
+                }
+
+                continue;
+            }
+
+            $newMilestones[] = $data;
+        }
+
+        $unassigned = $filter($parsed['unassigned'], null);
+
+        $existingLinks = $project->links()->get(['url', 'path']);
+        $links = array_values(array_filter($parsed['links'], fn ($l) => ! $existingLinks->contains(
+            fn ($e) => ($l['url'] !== null && $e->url === $l['url']) || ($l['path'] !== null && $e->path === $l['path'])
+        )));
+
+        $parsed['milestones'] = $newMilestones;
+        $parsed['unassigned'] = $unassigned;
+        $parsed['links'] = $links;
+        $parsed['totals'] = [
+            'milestones' => count(array_filter($newMilestones, fn ($m) => ! isset($m['existing_id']))),
+            'tasks' => array_sum(array_map(fn ($m) => count($m['tasks']), $newMilestones)) + count($unassigned),
+            'links' => count($links),
+        ];
+
+        return $parsed;
     }
 
     private function createTask(NotebookProject $project, ?ProjectMilestone $milestone, array $task, int $order): ProjectTask

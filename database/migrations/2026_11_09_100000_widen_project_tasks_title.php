@@ -8,11 +8,17 @@ return new class extends Migration
     // Название задачи плана могло обрезаться на 255 символах — делаем TEXT.
     public function up(): void
     {
+        if (DB::getDriverName() !== 'mysql') {
+            return;
+        }
         DB::statement('ALTER TABLE project_tasks MODIFY title TEXT NOT NULL');
     }
 
     public function down(): void
     {
+        if (DB::getDriverName() !== 'mysql') {
+            return;
+        }
         DB::statement('ALTER TABLE project_tasks MODIFY title VARCHAR(255) NOT NULL');
     }
 };

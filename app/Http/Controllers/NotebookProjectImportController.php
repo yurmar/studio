@@ -35,7 +35,8 @@ class NotebookProjectImportController extends Controller
     {
         $this->authorize('update', $notebookProject);
 
-        $parsed = $this->parsed($request, $importer);
+        // Повторный импорт того же плана: добавляется только то, чего в проекте ещё нет.
+        $parsed = $importer->onlyNew($notebookProject, $this->parsed($request, $importer));
 
         if ($request->boolean('dry_run')) {
             return response()->json($parsed);

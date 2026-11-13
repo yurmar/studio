@@ -228,4 +228,39 @@ MD;
             ->assertOk()->assertJsonPath('totals.tasks', 5);
         $this->assertSame(0, $project->tasks()->count());
     }
+
+    public function test_repeated_import_adds_only_new_and_keeps_existing(): void
+    {
+        $user = User::factory()->create();
+        $project = $user->notebookProjects()->create(['name' => 'P']);
+        Sanctum::actingAs($user);
+        $url = "/api/notebook-projects/{$project->id}/import-plan";
+
+        $this->postJson($url, ['markdown' => self::SAMPLE])->assertStatus(201);
+        $this->assertSame(5, $project->tasks()->count());
+
+        // Пользователь поменял задачу и этап.
+        $task = $project->tasks()->where('title', 'Сверстать главную')->first();
+        $task->update(['status' => 'done', 'description' => 'моё']);
+        $project->milestones()->where('title', 'Этап 2. Контент')->update(['status' => 'in_progress']);
+
+        // Повтор без изменений — ничего не добавляется.
+        $this->postJson($url, ['markdown' => self::SAMPLE, 'dry_run' => true])
+            ->assertOk()->assertJsonPath('totals.tasks', 0)->assertJsonPath('totals.milestones', 0);
+        $this->postJson($url, ['markdown' => self::SAMPLE])->assertStatus(201);
+        $this->assertSame(5, $project->tasks()->count());
+        $this->assertSame(2, $project->milestones()->count());
+
+        // В план добавили задачу в существующий этап и новый этап.
+        $md = str_replace('- [ ] Сверстать главную', "- [ ] Сверстать главную\n- [ ] Новая задача", self::SAMPLE)
+            ."\n## Этап 3. Релиз\n- [ ] Выкатить\n";
+        $this->postJson($url, ['markdown' => $md])->assertStatus(201);
+
+        $this->assertSame(3, $project->milestones()->count());
+        $this->assertSame(7, $project->tasks()->count());
+        $task->refresh();
+        $this->assertSame('done', $task->status);
+        $this->assertSame('моё', $task->description);
+        $this->assertSame('in_progress', $project->milestones()->where('title', 'Этап 2. Контент')->value('status'));
+    }
 }
