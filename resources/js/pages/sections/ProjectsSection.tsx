@@ -3,6 +3,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { ExternalLink, Plus, Trash2, Pencil, Eye, EyeOff, X } from 'lucide-react'
 import { apiGetProjects, apiCreateProject, apiUpdateProject, apiDeleteProject, ProjectItem } from '@/api/projects'
 import Modal from '@/components/ui/Modal'
+import ConfirmModal from '@/components/ui/ConfirmModal'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 
@@ -24,6 +25,8 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
     const [editing, setEditing] = useState<ProjectItem | null>(null)
     const [form, setForm] = useState<Record<string, string>>({})
     const [saving, setSaving] = useState(false)
+    const [toDelete, setToDelete] = useState<ProjectItem | null>(null)
+    const [deleting, setDeleting] = useState(false)
     const [detail, setDetail] = useState<ProjectItem | null>(null)
 
     useEffect(() => {
@@ -77,9 +80,16 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
         setItems(prev => prev.map(p => p.id === item.id ? r.data : p))
     }
 
-    const handleDelete = async (id: number) => {
-        await apiDeleteProject(id)
-        setItems(prev => prev.filter(p => p.id !== id))
+    const handleDelete = async () => {
+        if (!toDelete) return
+        setDeleting(true)
+        try {
+            await apiDeleteProject(toDelete.id)
+            setItems(prev => prev.filter(p => p.id !== toDelete.id))
+            setToDelete(null)
+        } finally {
+            setDeleting(false)
+        }
     }
 
     return (
@@ -139,7 +149,7 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
                                             <div className="absolute top-2 right-2 flex gap-1 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                                                 <button onClick={() => toggleActive(item)} title={item.is_active ? 'Деактивировать' : 'Активировать'} className={`w-7 h-7 rounded-lg flex items-center justify-center text-white ${item.is_active ? 'bg-amber-500' : 'bg-emerald-500'}`}>{item.is_active ? <Eye size={12} /> : <EyeOff size={12} />}</button>
                                                 <button onClick={() => openEdit(item)} className="w-7 h-7 rounded-lg bg-sky-500 flex items-center justify-center text-white"><Pencil size={12} /></button>
-                                                <button onClick={() => handleDelete(item.id)} className="w-7 h-7 rounded-lg bg-red-500 flex items-center justify-center text-white"><Trash2 size={12} /></button>
+                                                <button onClick={() => setToDelete(item)} className="w-7 h-7 rounded-lg bg-red-500 flex items-center justify-center text-white"><Trash2 size={12} /></button>
                                             </div>
                                         )}
                                     </div>
@@ -210,6 +220,16 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            <ConfirmModal
+                open={!!toDelete}
+                title="Удалить работу?"
+                message={toDelete ? `«${toDelete.title}» будет удалена без возможности восстановления.` : ''}
+                requireCode
+                confirming={deleting}
+                onConfirm={handleDelete}
+                onClose={() => setToDelete(null)}
+            />
 
             <Modal open={modal} title={editing ? 'Редактировать проект' : 'Добавить проект'} fields={FIELDS} values={form} onChange={(k, v) => setForm(p => ({ ...p, [k]: v }))} onSave={handleSave} onClose={() => setModal(false)} saving={saving} />
         </section>

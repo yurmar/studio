@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -11,6 +11,7 @@ interface ConfirmModalProps {
     cancelLabel?: string
     danger?: boolean
     confirming?: boolean
+    requireCode?: boolean
     onConfirm: () => void
     onClose: () => void
 }
@@ -23,9 +24,22 @@ export default function ConfirmModal({
     cancelLabel = 'Отмена',
     danger = true,
     confirming,
+    requireCode,
     onConfirm,
     onClose,
 }: ConfirmModalProps) {
+    const [code, setCode] = useState('')
+    const [input, setInput] = useState('')
+
+    useEffect(() => {
+        if (open) {
+            setCode(String(Math.floor(1000 + Math.random() * 9000)))
+            setInput('')
+        }
+    }, [open])
+
+    const codeOk = !requireCode || input.trim() === code
+
     useEffect(() => {
         const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
         document.addEventListener('keydown', onKey)
@@ -69,6 +83,24 @@ export default function ConfirmModal({
 
                         {message && <p className="text-sm text-gray-400">{message}</p>}
 
+                        {requireCode && (
+                            <div className="mt-4">
+                                <p className="text-sm text-gray-400 mb-2">
+                                    Для подтверждения введите код <span className="font-mono font-bold text-white tracking-widest">{code}</span>
+                                </p>
+                                <input
+                                    autoFocus
+                                    inputMode="numeric"
+                                    maxLength={4}
+                                    value={input}
+                                    onChange={e => setInput(e.target.value.replace(/\D/g, ''))}
+                                    onKeyDown={e => e.key === 'Enter' && codeOk && !confirming && onConfirm()}
+                                    placeholder="Код"
+                                    className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm font-mono tracking-widest outline-none focus:border-red-400"
+                                />
+                            </div>
+                        )}
+
                         <div className="flex gap-3 mt-6 justify-end">
                             <button
                                 onClick={onClose}
@@ -78,7 +110,7 @@ export default function ConfirmModal({
                             </button>
                             <button
                                 onClick={onConfirm}
-                                disabled={confirming}
+                                disabled={confirming || !codeOk}
                                 className={cn(
                                     'px-4 py-2 rounded-lg text-sm font-medium text-white transition-colors disabled:opacity-60',
                                     danger ? 'bg-red-500 hover:bg-red-400' : 'bg-sky-500 hover:bg-sky-400'
