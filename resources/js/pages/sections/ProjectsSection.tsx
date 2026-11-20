@@ -10,9 +10,9 @@ const FIELDS = [
     { key: 'title', label: 'Название проекта', type: 'text' as const },
     { key: 'stack', label: 'Стек', type: 'text' as const, placeholder: 'React, Laravel, MySQL' },
     { key: 'description', label: 'Описание', type: 'textarea' as const },
-    { key: 'screenshot_path', label: 'Путь к скриншоту', type: 'text' as const, placeholder: '/images/project.jpg' },
-    { key: 'url', label: 'URL проекта', type: 'url' as const },
-    { key: 'sort_order', label: 'Порядок', type: 'text' as const },
+    { key: 'screenshot_path', label: 'Картинка', type: 'image' as const },
+    { key: 'url', label: 'Ссылка на проект', type: 'url' as const, placeholder: 'https://...' },
+    { key: 'sort_order', label: 'Порядок (меньше — выше)', type: 'text' as const },
 ]
 
 export default function ProjectsSection({ limit }: { limit?: number }) {
@@ -87,7 +87,7 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
                 >
                     <div>
                         <p className="text-sky-400 text-sm font-medium tracking-widest uppercase mb-2">Портфолио</p>
-                        <h2 className="text-4xl md:text-5xl font-bold">Последние проекты</h2>
+                        <h2 className="text-4xl md:text-5xl font-bold">Реальные работы</h2>
                     </div>
                     {isAuth && (
                         <button onClick={openCreate} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/30 transition-colors">
@@ -98,7 +98,7 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
 
                 {displayed.length === 0 ? (
                     <motion.p initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} className="text-muted-foreground text-center py-16">
-                        Скоро будет информация
+                        Работы скоро появятся
                     </motion.p>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -126,7 +126,7 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
 
                                         {/* Auth controls */}
                                         {isAuth && (
-                                            <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <div className="absolute top-2 right-2 flex gap-1 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                                                 <button onClick={() => openEdit(item)} className="w-7 h-7 rounded-lg bg-sky-500 flex items-center justify-center text-white"><Pencil size={12} /></button>
                                                 <button onClick={() => handleDelete(item.id)} className="w-7 h-7 rounded-lg bg-red-500 flex items-center justify-center text-white"><Trash2 size={12} /></button>
                                             </div>
@@ -140,9 +140,9 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
                                             <p className="text-sky-400 text-xs font-medium mb-2">{item.stack}</p>
                                         )}
                                         {item.description ? (
-                                            <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">{item.description}</p>
+                                            <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-4">{item.description}</p>
                                         ) : (
-                                            <p className="text-muted-foreground text-sm mb-4 italic">Скоро будет информация</p>
+                                            <p className="text-muted-foreground text-sm mb-4 italic">Описание скоро появится</p>
                                         )}
                                         {item.url && (
                                             <a
@@ -151,7 +151,7 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
                                                 rel="noopener noreferrer"
                                                 className="inline-flex items-center gap-1.5 text-xs text-sky-400 hover:text-sky-300 font-medium transition-colors"
                                             >
-                                                Подробнее <ExternalLink size={12} />
+                                                Открыть проект <ExternalLink size={12} />
                                             </a>
                                         )}
                                     </div>

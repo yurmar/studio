@@ -11,7 +11,7 @@ import Brand from '@/components/Brand'
 
 const NAV = [
     { label: 'Главная', to: '/', anchor: '#hero' },
-    // { label: 'Портфолио', to: '/portfolio', anchor: null },
+    { label: 'Портфолио', to: '/portfolio', anchor: null },
     { label: 'Примеры', to: '/examples', anchor: null },
     { label: 'Файлы', to: '/files', anchor: null },
     { label: 'Обо мне', to: '/#about', anchor: '#about' },

@@ -12,7 +12,7 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center gap-4">
                     <Link to="/" className="hover:text-sky-400 transition-colors">Главная</Link>
-                    {/* <Link to="/portfolio" className="hover:text-sky-400 transition-colors">Портфолио</Link> */}
+                    <Link to="/portfolio" className="hover:text-sky-400 transition-colors">Портфолио</Link>
                     <a href="mailto:yurmardev@yandex.ru" className="hover:text-sky-400 transition-colors">Email</a>
                 </div>
             </div>

@@ -5,7 +5,7 @@ import Home from '@/pages/home'
 import ExampleGuard from '@/components/ExampleGuard'
 
 const Login = lazy(() => import('@/pages/login'))
-// const Portfolio = lazy(() => import('@/pages/portfolio'))
+const Portfolio = lazy(() => import('@/pages/portfolio'))
 const About = lazy(() => import('@/pages/about'))
 const Contacts = lazy(() => import('@/pages/contacts'))
 const Notebook = lazy(() => import('@/pages/notebook'))
@@ -52,7 +52,7 @@ export const router = createBrowserRouter([
         children: [
             { index: true, element: <Home /> },
             { path: 'login', element: <Suspense fallback={fallback}><Login /></Suspense> },
-            // { path: 'portfolio', element: <Suspense fallback={fallback}><Portfolio /></Suspense> },
+            { path: 'portfolio', element: <Suspense fallback={fallback}><Portfolio /></Suspense> },
             { path: 'about', element: <Suspense fallback={fallback}><About /></Suspense> },
             { path: 'contacts', element: <Suspense fallback={fallback}><Contacts /></Suspense> },
             { path: 'notebook', element: <Suspense fallback={fallback}><Notebook /></Suspense> },
