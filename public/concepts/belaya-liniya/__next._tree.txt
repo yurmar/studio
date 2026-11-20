@@ -1,5 +1,5 @@
-:HL["/concepts/belaya-liniya/_next/static/chunks/313tc9yxueu6m.css","style"]
+:HL["/concepts/belaya-liniya/_next/static/chunks/1tr7tlkf2znyp.css","style"]
 :HL["/concepts/belaya-liniya/_next/static/media/3e7212cfb3cf4439-s.p.1igz0qek6uidy.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/concepts/belaya-liniya/_next/static/media/4983332eabaf3709-s.p.19k1wz5-8gg9n.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 1:[["children",{"s":"__PAGE__","h":160}]]
-0:{"b":"wDQbJ5DSWqcxO12dmdqeZ","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"Y6sqVtVvlNXT18tpMrXpF","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

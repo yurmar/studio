@@ -1,4 +1,4 @@
-:HL["/concepts/belaya-liniya/_next/static/chunks/313tc9yxueu6m.css","style"]
+:HL["/concepts/belaya-liniya/_next/static/chunks/1tr7tlkf2znyp.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
-0:{"b":"wDQbJ5DSWqcxO12dmdqeZ","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"Y6sqVtVvlNXT18tpMrXpF","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
