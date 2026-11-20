@@ -103,7 +103,7 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
                 >
                     <div>
                         <p className="text-sky-400 text-sm font-medium tracking-widest uppercase mb-2">Портфолио</p>
-                        <h2 className="text-4xl md:text-5xl font-bold">Реальные работы</h2>
+                        <h2 className="text-4xl md:text-5xl font-bold">Несколько недавних работ</h2>
                     </div>
                     {isAuth && (
                         <button onClick={openCreate} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/30 transition-colors">
