@@ -1,0 +1,46 @@
+{
+  "user": { "name": "Анна" },
+  "items": [
+    { "id": "a1", "title": "Тихая гавань", "author": "Мария Ветрова", "narrator": "Ольга Климова", "kind": "book", "hours": 9.4, "rating": 4.8, "genre": "Роман", "cover": { "pattern": "waves", "from": "#1F4E79", "to": "#0E2A4A", "ink": "#F4D58D" } },
+    { "id": "a2", "title": "Город без часов", "author": "Павел Рязанов", "narrator": "Игорь Беляев", "kind": "book", "hours": 11.2, "rating": 4.7, "genre": "Фантастика", "cover": { "pattern": "moon", "from": "#3B2F63", "to": "#1B1535", "ink": "#E9C46A" } },
+    { "id": "a3", "title": "Последний маяк", "author": "Елена Строгова", "narrator": "Сергей Орлов", "kind": "book", "hours": 7.8, "rating": 4.9, "genre": "Приключения", "cover": { "pattern": "lighthouse", "from": "#B5532E", "to": "#5A2316", "ink": "#FBE3B8" } },
+    { "id": "a4", "title": "Хроники Серебряного леса", "author": "Антон Мальцев", "narrator": "Дарья Лунина", "kind": "book", "hours": 14.6, "rating": 4.6, "genre": "Фэнтези", "cover": { "pattern": "forest", "from": "#2F6B5A", "to": "#12352B", "ink": "#D8F0C8" } },
+    { "id": "a5", "title": "Утро на склоне", "author": "Ирина Белова", "narrator": "Ирина Белова", "kind": "book", "hours": 5.3, "rating": 4.5, "genre": "Проза", "cover": { "pattern": "mountains", "from": "#8A5A8C", "to": "#41284A", "ink": "#FFE0B5" } },
+    { "id": "a6", "title": "Разговор у костра", "author": "Студия «Лампа»", "narrator": "Ведущие: Лев и Нина", "kind": "podcast", "hours": 0.9, "rating": 4.8, "genre": "Подкаст", "cover": { "pattern": "sun", "from": "#C2703D", "to": "#6B2F1A", "ink": "#FFE8B0" } },
+    { "id": "a7", "title": "Звук науки", "author": "Студия «Лампа»", "narrator": "Ведущая: Рената", "kind": "podcast", "hours": 0.7, "rating": 4.7, "genre": "Подкаст", "cover": { "pattern": "rings", "from": "#2D5F8B", "to": "#132E4D", "ink": "#BFE3F5" } },
+    { "id": "a8", "title": "Дождливая среда", "author": "Нина Громова", "narrator": "Нина Громова", "kind": "book", "hours": 6.1, "rating": 4.4, "genre": "Рассказы", "cover": { "pattern": "rain", "from": "#4A5F8F", "to": "#202C4D", "ink": "#DDE6FA" } }
+  ],
+  "collections": [
+    { "title": "Новинки недели", "ids": ["a3", "a2", "a4", "a5"] },
+    { "title": "Для спокойного вечера", "ids": ["a8", "a1", "a5", "a7"] }
+  ],
+  "continue": { "id": "a1", "chapter": "Глава 7. Утренний прилив", "progress": 0.64, "left": "3 ч 24 мин" },
+  "book": {
+    "id": "a1",
+    "about": "Сезон закончился, а дом на берегу ещё хранит чужие письма. Героиня приезжает на неделю — и остаётся до первых штормов.",
+    "chapters": [
+      { "n": 1, "title": "Последний паром", "time": "42:10", "state": "done" },
+      { "n": 2, "title": "Дом у причала", "time": "38:25", "state": "done" },
+      { "n": 3, "title": "Письма без адреса", "time": "51:02", "state": "done" },
+      { "n": 4, "title": "Запах соли", "time": "44:48", "state": "done" },
+      { "n": 5, "title": "Гость из города", "time": "47:30", "state": "done" },
+      { "n": 6, "title": "Туман", "time": "36:15", "state": "done" },
+      { "n": 7, "title": "Утренний прилив", "time": "49:40", "state": "playing" },
+      { "n": 8, "title": "Старая карта", "time": "41:05", "state": "next" },
+      { "n": 9, "title": "Шторм", "time": "53:20", "state": "next" }
+    ]
+  },
+  "player": { "position": "1:22:14", "total": "2:34:40", "ratio": 0.53, "speed": "1,25×", "sleep": "30 мин" },
+  "library": {
+    "tabs": ["Все", "Скачано", "Подкасты"],
+    "storage": { "used": 1.4, "total": 4 },
+    "rows": [
+      { "id": "a1", "state": "downloaded", "meta": "Слушаете · 64%" },
+      { "id": "a3", "state": "downloaded", "meta": "Не начата" },
+      { "id": "a6", "state": "downloading", "meta": "Скачивается · 58%", "progress": 0.58 },
+      { "id": "a2", "state": "cloud", "meta": "В облаке · 11 ч 12 мин" },
+      { "id": "a7", "state": "downloaded", "meta": "Новый выпуск" },
+      { "id": "a4", "state": "cloud", "meta": "В облаке · 14 ч 36 мин" }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "user": { "name": "Анна" },
+  "slides": [
+    { "id": "s1", "icon": "leaf", "title": "Маленькие шаги\nпривычки", "text": "Выбирайте простые действия и повторяйте их каждый день — без давления и штрафов." },
+    { "id": "s2", "icon": "checkmark-circle", "title": "Отмечайте\nдень за днём", "text": "Одно касание — и привычка выполнена. Круг дня показывает, сколько уже сделано." },
+    { "id": "s3", "icon": "flame", "title": "Растите серию\nи видите прогресс", "text": "Календарь серий и недельная статистика мягко напоминают, как далеко вы зашли." }
+  ],
+  "habits": [
+    { "id": "h1", "title": "Стакан воды утром", "time": "07:30", "icon": "water", "tone": 1, "streak": 12, "done": true },
+    { "id": "h2", "title": "Зарядка 10 минут", "time": "08:00", "icon": "body", "tone": 0, "streak": 21, "done": true },
+    { "id": "h3", "title": "Читать 20 страниц", "time": "21:00", "icon": "book", "tone": 2, "streak": 8, "done": false },
+    { "id": "h4", "title": "Прогулка без телефона", "time": "18:30", "icon": "walk", "tone": 5, "streak": 5, "done": false },
+    { "id": "h5", "title": "Медитация 5 минут", "time": "22:00", "icon": "flower", "tone": 3, "streak": 16, "done": true },
+    { "id": "h6", "title": "Записать три мысли", "time": "22:30", "icon": "create", "tone": 4, "streak": 3, "done": false }
+  ],
+  "detail": {
+    "title": "Зарядка 10 минут",
+    "streak": 21,
+    "best": 34,
+    "total": 87,
+    "rate": 0.86,
+    "month": "Ноябрь 2026",
+    "monthStartOffset": 6,
+    "days": 30,
+    "doneDays": [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+    "week": [
+      { "day": "Пн", "value": 1 },
+      { "day": "Вт", "value": 1 },
+      { "day": "Ср", "value": 0.6 },
+      { "day": "Чт", "value": 1 },
+      { "day": "Пт", "value": 1 },
+      { "day": "Сб", "value": 0.4 },
+      { "day": "Вс", "value": 1 }
+    ]
+  },
+  "icons": ["water", "body", "book", "walk", "flower", "create", "moon", "musical-notes"],
+  "schedule": ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
+  "reminders": ["Утро", "День", "Вечер"]
+}

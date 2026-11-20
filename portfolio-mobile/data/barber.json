@@ -1,0 +1,41 @@
+{
+  "shop": "Ловко",
+  "services": [
+    { "id": "s1", "title": "Мужская стрижка", "note": "Машинка и ножницы, мытьё головы, укладка", "price": 1800, "minutes": 60, "icon": "cut" },
+    { "id": "s2", "title": "Стрижка + борода", "note": "Комплекс: образ целиком, горячее полотенце", "price": 2900, "minutes": 90, "icon": "sparkles" },
+    { "id": "s3", "title": "Оформление бороды", "note": "Моделирование, контур, уход маслом", "price": 1400, "minutes": 40, "icon": "flame" },
+    { "id": "s4", "title": "Королевское бритьё", "note": "Опасная бритва, паровое полотенце, бальзам", "price": 2200, "minutes": 45, "icon": "water" },
+    { "id": "s5", "title": "Детская стрижка", "note": "До 12 лет, спокойная атмосфера", "price": 1300, "minutes": 40, "icon": "happy" },
+    { "id": "s6", "title": "Камуфляж седины", "note": "Мягкое тонирование без резкого цвета", "price": 1700, "minutes": 50, "icon": "color-palette" }
+  ],
+  "masters": [
+    { "id": "m1", "name": "Артём Власов", "role": "Старший барбер", "rating": 4.9, "reviews": 412, "years": 9, "skin": "#E8BF9C", "hair": "#2B2118", "shirt": "#3A3834", "bg": "#4A4030", "beard": true, "hairStyle": 1, "glasses": false },
+    { "id": "m2", "name": "Игорь Лавров", "role": "Барбер", "rating": 4.8, "reviews": 287, "years": 6, "skin": "#D8A883", "hair": "#14110E", "shirt": "#55524B", "bg": "#3B3A3E", "beard": false, "hairStyle": 0, "glasses": true },
+    { "id": "m3", "name": "Денис Ковалёв", "role": "Мастер бритья", "rating": 4.9, "reviews": 198, "years": 12, "skin": "#F0CDAE", "hair": "#7A5A36", "shirt": "#2A2A2D", "bg": "#52432E", "beard": true, "hairStyle": 3, "glasses": false },
+    { "id": "m4", "name": "Марк Зорин", "role": "Барбер", "rating": 4.7, "reviews": 126, "years": 4, "skin": "#C28F6C", "hair": "#1C1612", "shirt": "#6F6B62", "bg": "#34363C", "beard": false, "hairStyle": 2, "glasses": false }
+  ],
+  "dates": [
+    { "id": "d20", "dow": "Пт", "day": 20, "month": "ноября" },
+    { "id": "d21", "dow": "Сб", "day": 21, "month": "ноября" },
+    { "id": "d22", "dow": "Вс", "day": 22, "month": "ноября" },
+    { "id": "d23", "dow": "Пн", "day": 23, "month": "ноября" },
+    { "id": "d24", "dow": "Вт", "day": 24, "month": "ноября" },
+    { "id": "d25", "dow": "Ср", "day": 25, "month": "ноября" },
+    { "id": "d26", "dow": "Чт", "day": 26, "month": "ноября" },
+    { "id": "d27", "dow": "Пт", "day": 27, "month": "ноября" }
+  ],
+  "slots": [
+    { "time": "10:00", "free": false },
+    { "time": "11:30", "free": true },
+    { "time": "12:30", "free": true },
+    { "time": "13:30", "free": false },
+    { "time": "14:30", "free": true },
+    { "time": "15:30", "free": true },
+    { "time": "16:30", "free": false },
+    { "time": "17:30", "free": true },
+    { "time": "18:30", "free": true },
+    { "time": "19:30", "free": true },
+    { "time": "20:30", "free": false },
+    { "time": "21:00", "free": true }
+  ]
+}

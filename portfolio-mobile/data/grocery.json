@@ -1,0 +1,230 @@
+{
+  "user": {
+    "name": "Анна",
+    "address": "Липовая аллея, 12, кв. 48"
+  },
+  "eta": "Доставим сегодня к 19:30",
+  "categories": [
+    {
+      "id": "c1",
+      "title": "Овощи",
+      "icon": "leaf"
+    },
+    {
+      "id": "c2",
+      "title": "Фрукты",
+      "icon": "nutrition"
+    },
+    {
+      "id": "c3",
+      "title": "Молочное",
+      "icon": "water"
+    },
+    {
+      "id": "c4",
+      "title": "Выпечка",
+      "icon": "cafe"
+    },
+    {
+      "id": "c5",
+      "title": "Яйца и сыр",
+      "icon": "egg"
+    },
+    {
+      "id": "c6",
+      "title": "Ягоды",
+      "icon": "flower"
+    }
+  ],
+  "banners": [
+    {
+      "id": "b1",
+      "title": "Сезон авокадо",
+      "text": "−25% на спелые плоды до воскресенья",
+      "kind": "avocado",
+      "bg": "#4E8A3C",
+      "ink": "#FFFFFF"
+    },
+    {
+      "id": "b2",
+      "title": "Завтрак за 5 минут",
+      "text": "Свежий хлеб, яйца и сыр",
+      "kind": "bread",
+      "bg": "#F26B1D",
+      "ink": "#FFFFFF"
+    },
+    {
+      "id": "b3",
+      "title": "Ягодная неделя",
+      "text": "Клубника из теплиц — от 249 ₽",
+      "kind": "strawberry",
+      "bg": "#D9475A",
+      "ink": "#FFFFFF"
+    }
+  ],
+  "filters": [
+    "Все",
+    "Со скидкой",
+    "Органик",
+    "Местные",
+    "Новинки"
+  ],
+  "products": [
+    {
+      "id": "p1",
+      "kind": "apple",
+      "title": "Яблоки «Гала»",
+      "weight": "1 кг",
+      "price": 169,
+      "old": 199,
+      "bg": "#FFE3DC",
+      "tag": "−15%"
+    },
+    {
+      "id": "p2",
+      "kind": "orange",
+      "title": "Апельсины сладкие",
+      "weight": "1 кг",
+      "price": 149,
+      "bg": "#FFE9CC"
+    },
+    {
+      "id": "p3",
+      "kind": "tomato",
+      "title": "Томаты на ветке",
+      "weight": "500 г",
+      "price": 219,
+      "old": 259,
+      "bg": "#FFDDD4",
+      "tag": "Органик"
+    },
+    {
+      "id": "p4",
+      "kind": "avocado",
+      "title": "Авокадо Хасс",
+      "weight": "2 шт",
+      "price": 239,
+      "old": 319,
+      "bg": "#E6F0CE",
+      "tag": "−25%"
+    },
+    {
+      "id": "p5",
+      "kind": "bread",
+      "title": "Хлеб на закваске",
+      "weight": "400 г",
+      "price": 129,
+      "bg": "#F8E6CE",
+      "tag": "Новинка"
+    },
+    {
+      "id": "p6",
+      "kind": "milk",
+      "title": "Молоко фермерское 3,2%",
+      "weight": "1 л",
+      "price": 109,
+      "bg": "#E1EEF8"
+    },
+    {
+      "id": "p7",
+      "kind": "cheese",
+      "title": "Сыр выдержанный",
+      "weight": "200 г",
+      "price": 349,
+      "bg": "#FFF0C8"
+    },
+    {
+      "id": "p8",
+      "kind": "eggs",
+      "title": "Яйца категории C0",
+      "weight": "10 шт",
+      "price": 119,
+      "bg": "#F6ECDA"
+    },
+    {
+      "id": "p9",
+      "kind": "carrot",
+      "title": "Морковь мытая",
+      "weight": "1 кг",
+      "price": 69,
+      "bg": "#FFE4CF"
+    },
+    {
+      "id": "p10",
+      "kind": "strawberry",
+      "title": "Клубника свежая",
+      "weight": "300 г",
+      "price": 249,
+      "old": 329,
+      "bg": "#FFDCE0",
+      "tag": "−25%"
+    },
+    {
+      "id": "p11",
+      "kind": "banana",
+      "title": "Бананы",
+      "weight": "1 кг",
+      "price": 99,
+      "bg": "#FFF3C4"
+    },
+    {
+      "id": "p12",
+      "kind": "broccoli",
+      "title": "Брокколи",
+      "weight": "400 г",
+      "price": 139,
+      "bg": "#DCEFD6",
+      "tag": "Органик"
+    }
+  ],
+  "detail": {
+    "productId": "p4",
+    "rating": 4.8,
+    "reviews": 126,
+    "description": "Спелые, но плотные плоды с нежной маслянистой мякотью. Подходят для тостов, салатов и смузи.",
+    "ingredients": [
+      "Авокадо Хасс 100%",
+      "Без добавок и консервантов",
+      "Страна: Перу"
+    ],
+    "nutrition": [
+      {
+        "label": "Ккал",
+        "value": "160"
+      },
+      {
+        "label": "Белки",
+        "value": "2 г"
+      },
+      {
+        "label": "Жиры",
+        "value": "15 г"
+      },
+      {
+        "label": "Углеводы",
+        "value": "9 г"
+      }
+    ]
+  },
+  "cart": [
+    {
+      "productId": "p4",
+      "qty": 2
+    },
+    {
+      "productId": "p5",
+      "qty": 1
+    },
+    {
+      "productId": "p10",
+      "qty": 1
+    }
+  ],
+  "slots": [
+    "18:00–19:00",
+    "19:30–20:30",
+    "21:00–22:00"
+  ],
+  "deliveryFee": 99,
+  "freeFrom": 1500
+}
