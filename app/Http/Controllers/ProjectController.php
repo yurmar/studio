@@ -33,8 +33,9 @@ class ProjectController extends Controller
             'stack' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'screenshot_path' => 'nullable|string',
-            'url' => 'nullable|url',
+            'url' => 'nullable|string|max:255',
             'is_featured' => 'nullable|boolean',
+            'is_concept' => 'sometimes|boolean',
             'is_active' => 'sometimes|boolean',
             'sort_order' => 'nullable|integer',
         ]);
@@ -49,8 +50,9 @@ class ProjectController extends Controller
             'stack' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'screenshot_path' => 'nullable|string',
-            'url' => 'nullable|url',
+            'url' => 'nullable|string|max:255',
             'is_featured' => 'nullable|boolean',
+            'is_concept' => 'sometimes|boolean',
             'is_active' => 'sometimes|boolean',
             'sort_order' => 'nullable|integer',
         ]);

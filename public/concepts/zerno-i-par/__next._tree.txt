@@ -1,0 +1,8 @@
+:HL["/concepts/zerno-i-par/_next/static/chunks/0ml8wuqlayl44.css","style"]
+:HL["/concepts/zerno-i-par/_next/static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/concepts/zerno-i-par/_next/static/media/2c6bb81ef2959eb3-s.p.2fpqrm51ez0iq.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/concepts/zerno-i-par/_next/static/media/76b70a1dbe058eb5-s.p.1y4-pdgsjb-pw.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/concepts/zerno-i-par/_next/static/media/c3d9c74ef0d9c07b-s.p.23aeddxv5enbo.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/concepts/zerno-i-par/img/hero.jpg","image",{"fetchPriority":"high","imageSrcSet":"/concepts/zerno-i-par/img/hero-800.jpg 800w, /concepts/zerno-i-par/img/hero.jpg 1400w","imageSizes":"(min-width:1024px) 50vw, 100vw"}]
+1:[["children",{"s":"__PAGE__","h":160}]]
+0:{"b":"c4kZgI4soZP2QcNy4Wy2V","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

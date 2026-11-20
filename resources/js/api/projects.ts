@@ -9,6 +9,7 @@ export interface ProjectItem {
     url: string | null
     is_active: boolean
     is_featured: boolean
+    is_concept: boolean
     sort_order: number
 }
 

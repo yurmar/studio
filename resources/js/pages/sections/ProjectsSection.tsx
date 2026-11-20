@@ -61,6 +61,7 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
                 ...form,
                 sort_order: Number(form.sort_order),
                 is_featured: editing?.is_featured ?? false,
+                is_concept: editing?.is_concept ?? false,
             }
             if (editing) {
                 const r = await apiUpdateProject(editing.id, payload)
@@ -140,6 +141,10 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
                                         )}
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
+                                        {item.is_concept && (
+                                            <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded-md text-[11px] font-semibold bg-amber-400 text-black">Концепт</span>
+                                        )}
+
                                         {isAuth && !item.is_active && (
                                             <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md text-[11px] font-medium bg-black/60 text-white/80">Неактивна</span>
                                         )}
@@ -160,6 +165,9 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
                                         {item.stack && (
                                             <p className="text-sky-400 text-xs font-medium mb-2 line-clamp-2">{item.stack}</p>
                                         )}
+                                        {item.is_concept && (
+                                            <p className="text-amber-400/90 text-xs font-medium mb-2">Концепт, не для реальных заказчиков</p>
+                                        )}
                                         {item.description ? (
                                             <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">{item.description}</p>
                                         ) : (
@@ -174,7 +182,7 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
                                                 rel="noopener noreferrer"
                                                 className="inline-flex items-center gap-1.5 text-xs text-sky-400 hover:text-sky-300 font-medium transition-colors"
                                             >
-                                                Открыть проект <ExternalLink size={12} />
+                                                {item.is_concept ? 'Смотреть концепт' : 'Открыть проект'} <ExternalLink size={12} />
                                             </a>
                                         )}
                                         </div>
@@ -202,6 +210,11 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
                             {detail.screenshot_path && <img src={detail.screenshot_path} alt={detail.title} className="w-full max-h-[50vh] object-cover object-top" />}
                             <div className="p-6 md:p-8">
                                 <h3 className="text-2xl font-bold mb-3">{detail.title}</h3>
+                                {detail.is_concept && (
+                                    <p className="mb-4 px-3 py-2 rounded-lg text-sm bg-amber-400/10 text-amber-300 border border-amber-400/30">
+                                        Это концепт для портфолио, а не работа для реального заказчика. Бренд, тексты, люди и цифры вымышлены.
+                                    </p>
+                                )}
                                 {detail.stack && (
                                     <div className="flex flex-wrap gap-2 mb-5">
                                         {detail.stack.split(',').map(t => t.trim()).filter(Boolean).map(t => (
@@ -212,7 +225,7 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
                                 {detail.description && <p className="text-muted-foreground leading-relaxed whitespace-pre-line mb-6">{detail.description}</p>}
                                 {detail.url && (
                                     <a href={detail.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-white text-sm font-medium transition-colors">
-                                        Открыть сайт <ExternalLink size={14} />
+                                        {detail.is_concept ? 'Смотреть концепт' : 'Открыть сайт'} <ExternalLink size={14} />
                                     </a>
                                 )}
                             </div>
