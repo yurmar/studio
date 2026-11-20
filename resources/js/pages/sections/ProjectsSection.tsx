@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { ExternalLink, Plus, Trash2, Pencil } from 'lucide-react'
+import { ExternalLink, Plus, Trash2, Pencil, Eye, EyeOff } from 'lucide-react'
 import { apiGetProjects, apiCreateProject, apiUpdateProject, apiDeleteProject, ProjectItem } from '@/api/projects'
 import Modal from '@/components/ui/Modal'
 import { useSelector } from 'react-redux'
@@ -71,6 +71,11 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
         }
     }
 
+    const toggleActive = async (item: ProjectItem) => {
+        const r = await apiUpdateProject(item.id, { title: item.title, is_active: !item.is_active })
+        setItems(prev => prev.map(p => p.id === item.id ? r.data : p))
+    }
+
     const handleDelete = async (id: number) => {
         await apiDeleteProject(id)
         setItems(prev => prev.filter(p => p.id !== id))
@@ -111,7 +116,7 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
                                     exit={{ opacity: 0, scale: 0.95 }}
                                     transition={{ delay: i * 0.1, duration: 0.5 }}
                                     whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                                    className="relative group card-block rounded-2xl overflow-hidden"
+                                    className={`relative group card-block rounded-2xl overflow-hidden ${item.is_active ? '' : 'opacity-60'}`}
                                 >
                                     {/* Screenshot */}
                                     <div className="relative h-44 bg-gradient-to-br from-sky-900/30 to-purple-900/30 overflow-hidden">
@@ -124,9 +129,14 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
                                         )}
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
+                                        {isAuth && !item.is_active && (
+                                            <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md text-[11px] font-medium bg-black/60 text-white/80">Неактивна</span>
+                                        )}
+
                                         {/* Auth controls */}
                                         {isAuth && (
                                             <div className="absolute top-2 right-2 flex gap-1 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                                                <button onClick={() => toggleActive(item)} title={item.is_active ? 'Деактивировать' : 'Активировать'} className={`w-7 h-7 rounded-lg flex items-center justify-center text-white ${item.is_active ? 'bg-amber-500' : 'bg-emerald-500'}`}>{item.is_active ? <Eye size={12} /> : <EyeOff size={12} />}</button>
                                                 <button onClick={() => openEdit(item)} className="w-7 h-7 rounded-lg bg-sky-500 flex items-center justify-center text-white"><Pencil size={12} /></button>
                                                 <button onClick={() => handleDelete(item.id)} className="w-7 h-7 rounded-lg bg-red-500 flex items-center justify-center text-white"><Trash2 size={12} /></button>
                                             </div>

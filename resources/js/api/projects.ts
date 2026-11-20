@@ -7,6 +7,7 @@ export interface ProjectItem {
     description: string | null
     screenshot_path: string | null
     url: string | null
+    is_active: boolean
     is_featured: boolean
     sort_order: number
 }

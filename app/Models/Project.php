@@ -8,10 +8,11 @@ class Project extends Model
 {
     protected $fillable = [
         'title', 'stack', 'description',
-        'screenshot_path', 'url', 'is_featured', 'sort_order',
+        'screenshot_path', 'url', 'is_active', 'is_featured', 'sort_order',
     ];
 
     protected $casts = [
         'is_featured' => 'boolean',
+        'is_active' => 'boolean',
     ];
 }

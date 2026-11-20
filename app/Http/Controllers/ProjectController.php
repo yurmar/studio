@@ -10,11 +10,19 @@ class ProjectController extends Controller
 {
     public function index(): JsonResponse
     {
-        return response()->json(Project::orderBy('sort_order')->get());
+        $query = Project::orderBy('sort_order');
+
+        if (! auth('sanctum')->check()) {
+            $query->where('is_active', true);
+        }
+
+        return response()->json($query->get());
     }
 
     public function show(Project $project): JsonResponse
     {
+        abort_unless($project->is_active || auth('sanctum')->check(), 404);
+
         return response()->json($project);
     }
 
@@ -27,6 +35,7 @@ class ProjectController extends Controller
             'screenshot_path' => 'nullable|string',
             'url' => 'nullable|url',
             'is_featured' => 'nullable|boolean',
+            'is_active' => 'sometimes|boolean',
             'sort_order' => 'nullable|integer',
         ]);
 
@@ -42,6 +51,7 @@ class ProjectController extends Controller
             'screenshot_path' => 'nullable|string',
             'url' => 'nullable|url',
             'is_featured' => 'nullable|boolean',
+            'is_active' => 'sometimes|boolean',
             'sort_order' => 'nullable|integer',
         ]);
 
