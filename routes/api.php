@@ -21,6 +21,7 @@ use App\Http\Controllers\ProjectLinkController;
 use App\Http\Controllers\ProjectMilestoneController;
 use App\Http\Controllers\ProjectTaskController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\PriceItemController;
 use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\TodoDayController;
 use App\Http\Controllers\TodoGeneralTaskController;
@@ -43,6 +44,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/services', [ServiceController::class, 'store']);
     Route::put('/services/{service}', [ServiceController::class, 'update']);
     Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
+    Route::post('/price-items', [PriceItemController::class, 'store']);
+    Route::put('/price-items/{priceItem}', [PriceItemController::class, 'update']);
+    Route::delete('/price-items/{priceItem}', [PriceItemController::class, 'destroy']);
 
     Route::post('/achievements', [AchievementController::class, 'store']);
     Route::put('/achievements/{achievement}', [AchievementController::class, 'update']);
@@ -156,6 +160,7 @@ Route::get('/hero', [HeroController::class, 'show']);
 Route::get('/about', [AboutController::class, 'show']);
 Route::get('/contacts', [ContactController::class, 'show']);
 Route::get('/services', [ServiceController::class, 'index']);
+Route::get('/price-items', [PriceItemController::class, 'index']);
 Route::get('/achievements', [AchievementController::class, 'index']);
 Route::get('/technologies', [TechnologyController::class, 'index']);
 Route::get('/projects', [ProjectController::class, 'index']);

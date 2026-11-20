@@ -1,6 +1,7 @@
 import HeroSection from './sections/HeroSection'
 import AboutSection from './sections/AboutSection'
 import ServicesSection from './sections/ServicesSection'
+import PricingSection from './sections/PricingSection'
 import AchievementsSection from './sections/AchievementsSection'
 import TechnologiesSection from './sections/TechnologiesSection'
 // import ProjectsSection from './sections/ProjectsSection'
@@ -13,6 +14,7 @@ export default function Home() {
             <HeroSection />
             <AboutSection />
             <ServicesSection />
+            <PricingSection />
             <AchievementsSection />
             <TechnologiesSection />
             {/*<ProjectsSection limit={3} />*/}
