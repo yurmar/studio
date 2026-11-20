@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BriefOrderController;
+use App\Http\Controllers\ConceptContentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ExampleController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\TodoTaskController;
 use Illuminate\Support\Facades\Route;
 
 // Auth
+Route::get('/concepts/{slug}/content', [ConceptContentController::class, 'index']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -59,6 +61,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/projects', [ProjectController::class, 'store']);
     Route::put('/projects/{project}', [ProjectController::class, 'update']);
     Route::delete('/projects/{project}', [ProjectController::class, 'destroy']);
+
+    Route::put('/concepts/{slug}/content', [ConceptContentController::class, 'update']);
 
     Route::post('/upload', [ImageController::class, 'upload']);
 
