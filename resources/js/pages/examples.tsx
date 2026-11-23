@@ -262,9 +262,9 @@ export default function Examples() {
                             className="flex items-end justify-between mb-10"
                         >
                             <div>
-                                <p className="text-sky-400 text-sm font-medium tracking-widest uppercase mb-2">Портфолио</p>
-                                <h1 className="text-4xl md:text-5xl font-bold">Примеры работ</h1>
-                                <p className="text-muted-foreground mt-3">Выберите категорию</p>
+                                <p className="text-sky-400 text-sm font-medium tracking-widest uppercase mb-2">Интерактивные демо</p>
+                                <h1 className="text-4xl md:text-5xl font-bold">Демонстрации веб-систем</h1>
+                                <p className="text-muted-foreground mt-3">Посмотрите сценарии и интерфейсы для справочников, отчётности, документов и аналитики.</p>
                             </div>
                             {isAuth && (
                                 <button

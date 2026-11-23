@@ -113,8 +113,8 @@ export default function ExamplesSection() {
                     className="flex items-center justify-between mb-12"
                 >
                     <div>
-                        <p className="text-sky-400 text-sm font-medium tracking-widest uppercase mb-2">Работы</p>
-                        <h2 className="text-4xl md:text-5xl font-bold">Примеры</h2>
+                        <p className="text-sky-400 text-sm font-medium tracking-widest uppercase mb-2">Интерактивные демо</p>
+                        <h2 className="text-4xl md:text-5xl font-bold">Демонстрации веб-систем</h2>
                     </div>
                     {isAuth && (
                         <button
