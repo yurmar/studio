@@ -234,10 +234,15 @@ function validateStep(step: number, form: BriefFormData): Errors {
     return errs
 }
 
-export default function BriefOrderModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+export default function BriefOrderModal({ open, onClose, initial, token }: {
+    open: boolean
+    onClose: () => void
+    initial?: Partial<BriefFormData>
+    token?: string
+}) {
     const [step, setStep] = useState(0)
     const [direction, setDirection] = useState(1)
-    const [form, setForm] = useState<BriefFormData>(EMPTY)
+    const [form, setForm] = useState<BriefFormData>({ ...EMPTY, ...initial })
     const [errors, setErrors] = useState<Errors>({})
     const [submitting, setSubmitting] = useState(false)
     const [done, setDone] = useState(false)
@@ -264,7 +269,7 @@ export default function BriefOrderModal({ open, onClose }: { open: boolean; onCl
         setSubmitting(true)
         setServerError('')
         try {
-            await apiCreateBriefOrder(form)
+            await apiCreateBriefOrder(form, token)
             setDone(true)
         } catch (e: any) {
             setServerError(e?.response?.data?.message || 'Произошла ошибка. Попробуйте ещё раз.')
@@ -275,7 +280,7 @@ export default function BriefOrderModal({ open, onClose }: { open: boolean; onCl
 
     const handleClose = () => {
         onClose()
-        setTimeout(() => { setStep(0); setForm(EMPTY); setErrors({}); setDone(false); setServerError('') }, 300)
+        setTimeout(() => { setStep(0); setForm({ ...EMPTY, ...initial }); setErrors({}); setDone(false); setServerError('') }, 300)
     }
 
     if (!open) return null

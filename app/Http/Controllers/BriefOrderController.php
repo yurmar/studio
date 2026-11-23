@@ -6,6 +6,7 @@ use App\Mail\BriefOrderReceived;
 use App\Models\BriefOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class BriefOrderController extends Controller
 {
@@ -41,11 +42,23 @@ class BriefOrderController extends Controller
             'tech_support'           => 'required|string',
             'content_filling'        => 'required|string|max:200',
             'additional_wishes'      => 'nullable|string',
+            'token'                  => 'nullable|string|max:64',
         ]);
 
         $data['site_functionality'] ??= [];
+        $token = $data['token'] ?? null;
+        unset($data['token']);
 
-        $order = BriefOrder::create($data);
+        // Бриф по ссылке из бота дополняет короткую заявку, а не создаёт новую
+        $order = $token
+            ? BriefOrder::where('token', $token)->where('brief_completed', false)->first()
+            : null;
+
+        if ($order) {
+            $order->update($data + ['brief_completed' => true, 'token' => null]);
+        } else {
+            $order = BriefOrder::create($data);
+        }
 
         try {
             $to = env('MAIL_NOTIFICATION_TO', 'yurmarchuk@gmail.com');
@@ -55,6 +68,65 @@ class BriefOrderController extends Controller
         }
 
         return response()->json(['message' => 'Запрос успешно отправлен', 'id' => $order->id], 201);
+    }
+
+    /** Короткая заявка из Telegram-бота (по секрету бота). */
+    public function storeFromBot(Request $request)
+    {
+        $secret = (string) config('services.bot.secret');
+        if ($secret === '' || !hash_equals($secret, (string) $request->header('X-Bot-Secret'))) {
+            abort(403);
+        }
+
+        $data = $request->validate([
+            'contact_person'    => 'required|string|max:500',
+            'task_description'  => 'required|string|max:5000',
+            'budget'            => 'nullable|string|max:200',
+            'deadline'          => 'nullable|string|max:200',
+            'telegram_id'       => 'required|integer',
+            'telegram_username' => 'nullable|string|max:100',
+        ]);
+
+        $token = Str::random(40);
+
+        // Обязательные колонки полного брифа в короткой заявке остаются пустыми
+        $order = BriefOrder::create($data + [
+            'source'          => 'telegram',
+            'token'           => $token,
+            'brief_completed' => false,
+            'company_name' => '', 'company_activity' => '', 'products_info' => '',
+            'site_sections' => '', 'brand_style' => '', 'target_audience' => '',
+            'language_versions' => '', 'design_impression' => '', 'color_scheme' => '',
+            'content_placement' => '', 'has_advertising' => '', 'hosting_type' => '',
+            'tech_support' => '', 'content_filling' => '',
+            'site_types' => [], 'site_tasks' => [], 'site_functionality' => [],
+        ]);
+
+        return response()->json([
+            'id'    => $order->id,
+            'token' => $token,
+            'url'   => rtrim(config('app.url'), '/') . '/brief?t=' . $token,
+        ], 201);
+    }
+
+    /** Данные для предзаполнения формы /brief по токену из бота. */
+    public function prefill(string $token)
+    {
+        $order = BriefOrder::where('token', $token)->where('brief_completed', false)->first();
+        if (!$order) {
+            return response()->json(['message' => 'Ссылка недействительна'], 404);
+        }
+
+        $wishes = array_filter([
+            'Задача: ' . $order->task_description,
+            $order->budget ? 'Бюджет: ' . $order->budget : null,
+            $order->deadline ? 'Срок: ' . $order->deadline : null,
+        ]);
+
+        return response()->json([
+            'contact_person'   => $order->contact_person,
+            'additional_wishes' => implode("\n", $wishes),
+        ]);
     }
 
     public function index()

@@ -38,8 +38,11 @@ export interface BriefOrder extends BriefFormData {
     updated_at: string
 }
 
-export const apiCreateBriefOrder = (data: BriefFormData) =>
-    api.post<{ message: string; id: number }>('/brief-orders', data)
+export const apiCreateBriefOrder = (data: BriefFormData, token?: string) =>
+    api.post<{ message: string; id: number }>('/brief-orders', token ? { ...data, token } : data)
+
+export const apiGetBriefPrefill = (token: string) =>
+    api.get<Partial<BriefFormData>>(`/brief-orders/prefill/${encodeURIComponent(token)}`)
 
 export const apiGetBriefOrders = () =>
     api.get<BriefOrder[]>('/brief-orders')

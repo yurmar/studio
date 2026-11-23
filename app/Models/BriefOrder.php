@@ -15,11 +15,16 @@ class BriefOrder extends Model
         'design_impression', 'color_scheme', 'content_placement',
         'liked_sites', 'disliked_sites', 'has_advertising', 'advertising_details',
         'hosting_type', 'tech_support', 'content_filling', 'additional_wishes',
+        'source', 'telegram_id', 'telegram_username', 'token',
+        'task_description', 'budget', 'deadline', 'brief_completed',
     ];
+
+    protected $hidden = ['token'];
 
     protected $casts = [
         'site_types'        => 'array',
         'site_tasks'        => 'array',
         'site_functionality' => 'array',
+        'brief_completed'   => 'boolean',
     ];
 }

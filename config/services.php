@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    // Секрет Telegram-бота PlusuyProBot для приёма коротких заявок
+    'bot' => [
+        'secret' => env('BOT_API_SECRET'),
+    ],
+
 ];

@@ -153,6 +153,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // Brief orders: публичное создание, защищённый просмотр
 Route::post('/brief-orders', [BriefOrderController::class, 'store']);
+Route::post('/bot/brief-orders', [BriefOrderController::class, 'storeFromBot']);
+Route::get('/brief-orders/prefill/{token}', [BriefOrderController::class, 'prefill'])->middleware('throttle:30,1');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/brief-orders', [BriefOrderController::class, 'index']);
